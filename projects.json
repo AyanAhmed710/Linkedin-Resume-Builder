@@ -1,0 +1,201 @@
+{
+  "projects": [
+    {
+      "project_id": "P001",
+      "title": "Customer Churn Prediction",
+      "category": "Machine Learning",
+      "industry": "Telecom",
+      "experience_level": "Advanced",
+      "tools": ["Python", "Pandas", "Scikit-Learn", "XGBoost"],
+      "tech_stack": ["ML", "Data Cleaning", "Model Evaluation"],
+      "dataset_type": "Structured",
+      "deployment_ready": true,
+      "business_domain": "Customer Retention",
+      "summary": "Built a machine learning model to predict telecom customer churn using advanced feature engineering and XGBoost.",
+      "problem_statement": "Telecom company faced high customer churn impacting revenue.",
+      "solution_approach": "Performed EDA, handled imbalance using SMOTE, trained XGBoost classifier, evaluated using ROC-AUC and F1 score.",
+      "results": {
+        "roc_auc": 0.87,
+        "impact": "Enabled proactive retention strategies reducing churn risk by 18%"
+      },
+      "resume_bullet": "Developed XGBoost churn model achieving 87% ROC-AUC and improved customer retention strategy."
+    },
+    {
+      "project_id": "P002",
+      "title": "Call Center Performance Dashboard",
+      "category": "Data Analysis",
+      "industry": "Call Center",
+      "experience_level": "Intermediate",
+      "tools": ["Power BI", "SQL", "Excel"],
+      "tech_stack": ["KPI Design", "DAX", "Data Modeling"],
+      "dataset_type": "Structured",
+      "deployment_ready": true,
+      "business_domain": "Operations Analytics",
+      "summary": "Created interactive dashboard analyzing agent performance metrics.",
+      "problem_statement": "Management lacked visibility into SLA and AHT performance.",
+      "solution_approach": "Designed star schema, created DAX KPIs for AHT, FCR, SLA compliance.",
+      "results": {
+        "impact": "Reduced average handling time by 12%"
+      },
+      "resume_bullet": "Designed Power BI dashboard improving call center performance tracking and operational efficiency."
+    },
+    {
+      "project_id": "P003",
+      "title": "Sales Forecasting Model",
+      "category": "Data Science",
+      "industry": "Retail",
+      "experience_level": "Advanced",
+      "tools": ["Python", "Prophet", "ARIMA"],
+      "tech_stack": ["Time Series", "Forecasting"],
+      "dataset_type": "Time Series",
+      "deployment_ready": false,
+      "business_domain": "Demand Forecasting",
+      "summary": "Built time-series forecasting model to predict monthly retail sales.",
+      "problem_statement": "Retail chain needed better inventory planning.",
+      "solution_approach": "Used Prophet for seasonality modeling and ARIMA for validation.",
+      "results": {
+        "mape": "8%",
+        "impact": "Improved inventory planning accuracy"
+      },
+      "resume_bullet": "Developed sales forecasting model achieving 8% MAPE using Prophet."
+    },
+    {
+      "project_id": "P004",
+      "title": "Credit Card Fraud Detection",
+      "category": "Machine Learning",
+      "industry": "Banking",
+      "experience_level": "Advanced",
+      "tools": ["Python", "Logistic Regression", "Random Forest"],
+      "tech_stack": ["Imbalanced Data", "Classification"],
+      "dataset_type": "Structured",
+      "deployment_ready": false,
+      "business_domain": "Risk Analytics",
+      "summary": "Built fraud detection model to identify suspicious transactions.",
+      "problem_statement": "High financial losses due to fraudulent transactions.",
+      "solution_approach": "Applied Random Forest and optimized recall using precision-recall tuning.",
+      "results": {
+        "recall": "94%",
+        "impact": "Reduced false negatives in high-risk transactions"
+      },
+      "resume_bullet": "Implemented fraud detection system achieving 94% recall using ensemble learning."
+    },
+    {
+      "project_id": "P005",
+      "title": "HR Attrition Analysis",
+      "category": "Data Analysis",
+      "industry": "Human Resources",
+      "experience_level": "Intermediate",
+      "tools": ["SQL", "Power BI"],
+      "tech_stack": ["Root Cause Analysis", "Dashboarding"],
+      "dataset_type": "Structured",
+      "deployment_ready": true,
+      "business_domain": "Workforce Analytics",
+      "summary": "Analyzed employee turnover factors and presented actionable insights.",
+      "problem_statement": "Organization experienced rising employee attrition.",
+      "solution_approach": "Performed SQL analysis and visualized insights in Power BI.",
+      "results": {
+        "impact": "Identified overtime and salary band as major attrition factors"
+      },
+      "resume_bullet": "Conducted HR attrition analysis identifying key drivers of employee turnover."
+    },
+    {
+      "project_id": "P006",
+      "title": "Customer Sentiment Analysis",
+      "category": "NLP / Machine Learning",
+      "industry": "E-commerce",
+      "experience_level": "Advanced",
+      "tools": ["Python", "HuggingFace", "TF-IDF"],
+      "tech_stack": ["NLP", "Text Classification"],
+      "dataset_type": "Text",
+      "deployment_ready": false,
+      "business_domain": "Customer Experience",
+      "summary": "Built sentiment classifier to analyze customer feedback reviews.",
+      "problem_statement": "Company lacked visibility into customer satisfaction trends.",
+      "solution_approach": "Preprocessed text data and trained sentiment classification model.",
+      "results": {
+        "accuracy": "89%",
+        "impact": "Enabled tracking of customer satisfaction trends"
+      },
+      "resume_bullet": "Developed NLP-based sentiment classifier achieving 89% accuracy."
+    },
+    {
+      "project_id": "P007",
+      "title": "SQL Data Warehouse Design",
+      "category": "Data Engineering",
+      "industry": "E-commerce",
+      "experience_level": "Advanced",
+      "tools": ["PostgreSQL", "SQL"],
+      "tech_stack": ["Star Schema", "Query Optimization"],
+      "dataset_type": "Structured",
+      "deployment_ready": true,
+      "business_domain": "Business Intelligence",
+      "summary": "Designed star schema data warehouse for scalable reporting.",
+      "problem_statement": "Slow reporting queries affecting business decisions.",
+      "solution_approach": "Built fact and dimension tables with indexed queries.",
+      "results": {
+        "performance_improvement": "35%",
+        "impact": "Improved reporting speed significantly"
+      },
+      "resume_bullet": "Designed star-schema warehouse improving reporting performance by 35%."
+    },
+    {
+      "project_id": "P008",
+      "title": "Customer Segmentation using K-Means",
+      "category": "Machine Learning",
+      "industry": "Retail",
+      "experience_level": "Intermediate",
+      "tools": ["Python", "K-Means", "PCA"],
+      "tech_stack": ["Clustering", "Dimensionality Reduction"],
+      "dataset_type": "Structured",
+      "deployment_ready": false,
+      "business_domain": "Marketing Analytics",
+      "summary": "Segmented customers into behavioral groups for targeted marketing.",
+      "problem_statement": "Retail company lacked customer targeting strategy.",
+      "solution_approach": "Applied K-Means clustering and PCA visualization.",
+      "results": {
+        "clusters": 4,
+        "impact": "Enabled targeted marketing campaigns"
+      },
+      "resume_bullet": "Applied K-Means clustering to segment customers into 4 behavioral groups."
+    },
+    {
+      "project_id": "P009",
+      "title": "Real-Time Twitter Sentiment Dashboard",
+      "category": "Data Science",
+      "industry": "Social Media Analytics",
+      "experience_level": "Advanced",
+      "tools": ["Python", "SQL", "Power BI"],
+      "tech_stack": ["Streaming Data", "Sentiment Analysis"],
+      "dataset_type": "Text",
+      "deployment_ready": true,
+      "business_domain": "Public Opinion Analytics",
+      "summary": "Built real-time sentiment dashboard analyzing Twitter data streams.",
+      "problem_statement": "Need for real-time public sentiment tracking.",
+      "solution_approach": "Created ETL pipeline storing tweets in SQL and visualized in Power BI.",
+      "results": {
+        "impact": "Enabled real-time sentiment monitoring"
+      },
+      "resume_bullet": "Developed real-time Twitter sentiment dashboard integrating SQL and Power BI."
+    },
+    {
+      "project_id": "P010",
+      "title": "Predictive Maintenance Model",
+      "category": "Machine Learning",
+      "industry": "Manufacturing",
+      "experience_level": "Advanced",
+      "tools": ["Python", "Gradient Boosting"],
+      "tech_stack": ["Predictive Modeling", "Feature Engineering"],
+      "dataset_type": "Time Series",
+      "deployment_ready": false,
+      "business_domain": "Industrial Analytics",
+      "summary": "Predicted machine failure using sensor data modeling.",
+      "problem_statement": "Unexpected equipment downtime caused financial losses.",
+      "solution_approach": "Engineered time-based features and trained Gradient Boosting model.",
+      "results": {
+        "downtime_reduction": "22%",
+        "impact": "Reduced unexpected equipment downtime"
+      },
+      "resume_bullet": "Built predictive maintenance model reducing downtime risk by 22%."
+    }
+  ]
+}

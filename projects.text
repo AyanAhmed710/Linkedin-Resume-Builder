@@ -1,0 +1,187 @@
+Project 1: Customer Churn Prediction (Telecom – Machine Learning)
+Category: Machine Learning
+Industry: Telecom
+Tools Used: Python, Pandas, NumPy, Scikit-learn, XGBoost, SMOTE, Matplotlib
+Objective:
+Developed a predictive machine learning model to identify telecom customers likely to churn, enabling proactive retention strategies.
+Dataset:
+Telco Customer Churn dataset including demographic, billing, and service usage information.
+Methods & Approach:
+Performed extensive data preprocessing including missing value handling, encoding categorical variables, and feature scaling.
+Applied feature engineering to extract customer behavior indicators.
+Handled class imbalance using SMOTE.
+Trained multiple models including Logistic Regression, Random Forest, and XGBoost.
+Optimized hyperparameters using GridSearchCV.
+Evaluated performance using ROC-AUC, Precision, Recall, and F1-score.
+Results & Impact:
+Achieved ROC-AUC score of 0.87.
+Identified high-risk customers, enabling targeted campaigns that reduced churn by 18%.
+Skills Demonstrated:
+Machine Learning, Classification, Feature Engineering, Model Evaluation, Imbalanced Data Handling.
+
+
+Project 2: Call Center Performance Analytics Dashboard (Data Analysis – Operations)
+Category: Data Analysis
+Industry: Call Center / Customer Support
+Tools Used: SQL, Power BI, Excel, DAX
+Objective:
+Built an interactive dashboard to monitor call center KPIs and improve operational efficiency.
+Dataset:
+Call logs including agent performance, call duration, wait time, resolution rate, and customer satisfaction scores.
+Methods & Approach:
+Designed relational SQL queries to clean and aggregate data.
+Created KPI measures using DAX (Average Handle Time, First Call Resolution, SLA compliance).
+Developed interactive Power BI dashboard with filtering by team, date, and shift.
+Results & Impact:
+Identified underperforming shifts and optimized agent allocation.
+Reduced average wait time by 22%.
+Improved SLA compliance from 78% to 91%.
+Skills Demonstrated:
+Data Visualization, KPI Analysis, SQL Optimization, Business Intelligence.
+
+
+Project 3: Credit Card Fraud Detection (Machine Learning – Finance)
+Category: Machine Learning
+Industry: Finance
+Tools Used: Python, Scikit-learn, Isolation Forest, XGBoost
+Objective:
+Developed an anomaly detection model to identify fraudulent credit card transactions in real time.
+Dataset:
+Highly imbalanced financial transaction dataset.
+Methods & Approach:
+Performed feature scaling and PCA analysis.
+Implemented Isolation Forest and XGBoost classifiers.
+Addressed class imbalance using undersampling techniques.
+Evaluated models using Precision-Recall curve due to imbalance.
+Results & Impact:
+Improved fraud detection recall by 30% compared to baseline system.
+Reduced false positives by 15%.
+Skills Demonstrated:
+Anomaly Detection, Imbalanced Data Modeling, Financial Risk Analytics.
+
+
+Project 4: Sales Forecasting Model (Time Series – Retail)
+Category: Data Science
+Industry: Retail
+Tools Used: Python, Prophet, ARIMA, Pandas
+Objective:
+Forecasted monthly sales to support inventory planning and revenue optimization.
+Dataset:
+Historical retail sales data across multiple product categories.
+Methods & Approach:
+Performed time-series decomposition and seasonality analysis.
+Implemented ARIMA and Facebook Prophet models.
+Evaluated using MAE and RMSE metrics.
+Results & Impact:
+Reduced forecasting error by 25%.
+Optimized inventory management and reduced stockouts.
+Skills Demonstrated:
+Time Series Analysis, Forecasting, Business Planning.
+
+
+Project 5: Customer Sentiment Analysis (NLP – Social Media)
+Category: Machine Learning / NLP
+Industry: E-commerce
+Tools Used: Python, NLTK, TF-IDF, Logistic Regression
+Objective:
+Analyzed customer reviews to classify sentiment and identify improvement areas.
+Dataset:
+Online product reviews scraped from e-commerce platforms.
+Methods & Approach:
+Performed text cleaning, tokenization, and stopword removal.
+Extracted features using TF-IDF vectorization.
+Built classification model using Logistic Regression.
+Results & Impact:
+Achieved 89% classification accuracy.
+Identified major complaint themes leading to improved product quality.
+Skills Demonstrated:
+Natural Language Processing, Text Classification, Sentiment Modeling.
+
+
+Project 6: Employee Attrition Analysis (HR Analytics)
+Category: Data Analysis
+Industry: Human Resources
+Tools Used: SQL, Power BI, Python
+Objective:
+Analyzed workforce data to identify drivers of employee attrition.
+Dataset:
+Employee demographic, salary, department, and tenure data.
+Methods & Approach:
+Performed exploratory data analysis to detect patterns.
+Built logistic regression model to estimate attrition probability.
+Developed HR dashboard for monitoring attrition trends.
+Results & Impact:
+Identified salary dissatisfaction and overtime as major factors.
+Reduced attrition rate by 12% after policy changes.
+Skills Demonstrated:
+HR Analytics, Predictive Modeling, Business Insights.
+
+
+Project 7: Real-Time Chatbot for Customer Support (AI Application)
+Category: Applied AI
+Industry: Customer Support
+Tools Used: LangChain, OpenAI API, ChromaDB, Python
+Objective:
+Developed AI-powered chatbot to answer customer queries using company knowledge base.
+Methods & Approach:
+Created vector database using Chroma.
+Embedded company documents using OpenAI embeddings.
+Implemented retrieval-augmented generation (RAG) pipeline.
+Results & Impact:
+Reduced human agent workload by 35%.
+Improved response time from 5 minutes to instant replies.
+Skills Demonstrated:
+LangChain, Vector Databases, RAG Architecture, LLM Integration.
+
+
+Project 8: Loan Default Prediction (Banking – ML)
+Category: Machine Learning
+Industry: Banking
+Tools Used: Python, XGBoost, Scikit-learn
+Objective:
+Predicted loan default probability to support credit risk assessment.
+Methods & Approach:
+Feature engineering from credit history data.
+Built gradient boosting model.
+Optimized decision threshold for risk minimization.
+Results & Impact:
+Improved risk classification accuracy by 20%.
+Reduced non-performing loans significantly.
+Skills Demonstrated:
+Risk Modeling, Classification, Financial Analytics.
+
+
+Project 9: Website Traffic Analytics (Marketing Analytics)
+Category: Data Analysis
+Industry: Digital Marketing
+Tools Used: Google Analytics, SQL, Power BI
+Objective:
+Analyzed web traffic patterns to improve conversion rates.
+Methods & Approach:
+Segmented traffic sources and user behavior.
+Built funnel analysis dashboard.
+Identified bounce rate drivers.
+Results & Impact:
+Improved conversion rate by 17%.
+Reduced bounce rate by 10%.
+Skills Demonstrated:
+Marketing Analytics, Funnel Optimization, Data Visualization.
+
+
+Project 10: Predictive Maintenance Model (Manufacturing – ML)
+Category: Machine Learning
+Industry: Manufacturing
+Tools Used: Python, Random Forest, Sensor Data Processing
+Objective:
+Built predictive maintenance model to forecast machine failures.
+Dataset:
+Industrial IoT sensor readings including temperature, vibration, and pressure data.
+Methods & Approach:
+Performed feature extraction from time-based sensor data.
+Trained Random Forest classifier.
+Evaluated using F1-score and precision metrics.
+Results & Impact:
+Reduced unexpected downtime by 28%.
+Saved operational costs significantly.
+Skills Demonstrated:
+Predictive Analytics, Industrial AI, Time-Series Modeling.

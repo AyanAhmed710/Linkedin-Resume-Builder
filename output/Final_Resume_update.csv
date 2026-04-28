@@ -1,0 +1,138 @@
+country,job_title,company_name,location,job_url,job_description,resume_updated
+Belgium,Senior AI Engineer,,,https://www.linkedin.com/jobs/view/4181902557/?eBP=NON_CHARGEABLE_CHANNEL&refId=8q8PSNBKRPOq9h%2B%2FuqiLFQ%3D%3D&trackingId=J9ImLP6ipy1qz5pveCqxYQ%3D%3D&trk=flagship3_search_srp_jobs,"We are looking for an outstanding individual with expertise in training large-scale AI models, including Large Language Models (LLMs) or equivalent architectures. This person will play a key role in the development and optimization of AI workloads, collaborating closely with hardware and software engineers in a co-design environment.
+
+Key Responsibilities
+ Design, train, and optimize large-scale AI models, including LLMs and similar architectures.
+ Collaborate with hardware and software engineers to ensure efficient model deployment on custom silicon solutions.
+ Develop new techniques for improving training efficiency, model accuracy, and hardware utilization.
+ Implement distributed training strategies for large-scale models across high-performance computing infrastructures.
+ Strong programming skills in Python, (Go, C++,…is considered a plus)
+ Explore and implement advanced AI/ML techniques, such as sparsity, quantization, and knowledge distillation.
+ Work with state-of-the-art frameworks such as TensorFlow, PyTorch, JAX, and Hugging Face Transformers.
+ Conduct performance benchmarking and profiling of ML workloads on custom accelerators.
+ Stay up to date with advancements in deep learning and AI hardware to bring innovative ideas into Openchip’s AI strategy.
+ Participate in technical discussions and contribute to Openchip’s AI research and development roadmap.
+Qualifications
+ BSc, MSc or PhD in Computer Science, Machine Learning, Artificial Intelligence, or a related field.
+ Proven experience in training and deploying large AI models, particularly LLMs or equivalent large architectures.
+ Strong programming skills in Python and proficiency with ML frameworks such as TensorFlow or PyTorch.
+ Experience with distributed training, model parallelism, and large-scale data handling.
+ Strong knowledge of deep learning model optimization techniques.
+ Experience working in a hardware/software co-design environment is highly desirable.
+ Fluent in English is a must; knowledge of additional European languages (German, Dutch, Spanish, French, or Italian) is a plus.
+Soft Skills
+ The candidate should be equipped with a unique skills-set: Self-starter, self-motivated, humility, excellent communications skills; outstanding human qualities as honesty, integrity, fellowship, generosity and commitment with his/her mission to change the world.
+ Excellent communication and collaboration skills to work effectively in a multidisciplinary team.
+ A strong commitment to innovation and problem-solving, a can-do attitude.
+ Passionate about driving the next generation of AI hardware/software integration.
+ Willingness to mentor junior engineers and contribute to a collaborative learning culture.
+What We Offer
+ Join an innovative team and experience company growth.
+ We believe in investing in our employees and providing them with opportunities for growth and career development.
+ Work in a hybrid environment with flexible scheduling.
+ We offer a remuneration that values your experience.
+ A chance to work on one of the most transformative AI and silicon engineering companies in Europe.
+ The position will be based in Ghent (Belgium). Occasional travel to Barcelona (Spain) might be required.
+We are looking for outstanding people willing to join our mission to change the silicon industry and help build a better world. If you feel identified with Openchip, please contact us.
+
+At Openchip & Software Technologies S.L., we believe a diverse and inclusive team is the key to groundbreaking ideas. We foster a work environment where everyone feels valued, respected, and empowered to reach their full potential – regardless of race, gender, ethnicity, sexual orientation, or gender identity.",4181902557.pdf
+Belgium,AI Research Engineer,,,https://www.linkedin.com/jobs/view/4328607270/?eBP=NON_CHARGEABLE_CHANNEL&refId=8q8PSNBKRPOq9h%2B%2FuqiLFQ%3D%3D&trackingId=YOeRqWqK%2BQwrabyBWiwgIQ%3D%3D&trk=flagship3_search_srp_jobs,"This role bridges cutting-edge research and real-world application, transforming research ideas into scalable, production-ready AI systems.
+Key Responsibilities
+Conduct research into machine learning, deep learning, and AI algorithms
+Design and implement prototypes to test new models, architectures, and approaches
+Translate research concepts into deployable engineering solutions
+Experiment with large datasets and evaluate model performance
+Collaborate with AI engineers, data scientists, and product teams
+Stay up to date with the latest academic research and industry advancements
+Document findings, methodologies, and experimental results
+Required Skills & Experience
+Strong programming skills in Python (and/or C++), with experience using ML frameworks such as PyTorch or TensorFlow
+Solid foundation in machine learning, statistics, and optimisation techniques
+Experience implementing and evaluating novel models or algorithms
+Ability to read, understand, and apply academic research papers
+Strong problem-solving and analytical skills
+Nice to Have",4328607270.pdf
+Netherlands,"AI Language Engineer, Artificial General Intelligence - Data Services - Jobbird.com",,,https://www.linkedin.com/jobs/view/4377612358/?eBP=NON_CHARGEABLE_CHANNEL&refId=WDGwp1C9HXHKqEEfz0yfCQ%3D%3D&trackingId=gUIXA0CNNWIKnDGzgVBI0w%3D%3D&trk=flagship3_search_srp_jobs,"The Amazon Artificial General Intelligence (AGI) Data Services organization is responsible for developing diverse datasets to train and evaluate the Amazon AI models. We are looking for Language Engineers to join our science and engineering team to support the development of complex, multimodal datasets, using a range of approaches including synthetic data generation, model-supported data generation, and human-in-the-loop data collections.
+
+You will play a critical role in driving innovation and advancing the state-of-the-art in evaluating and training AI models. You will work closely with cross-functional teams, including product managers, engineers, and data scientists to ensure that our AI systems are best in class.
+
+Key job responsibilities
+
+
+ Design complex data collections with human participants in response to science needs: author instructions, define and implement quality targets and mechanisms, provide day-to-day coordination of data collection efforts (including planning, scheduling, and reporting), and be responsible for the final deliverables
+ Design and conduct complex data creation tasks using synthetic and model-based data generation methods, following state-of-the-art approaches
+ Analyze and extract insights from large amounts of data
+ Build tools or tool prototypes for data analysis or data creation, using Python or another scripting language
+ Use modeling tools to bootstrap or test new AI functionalities
+ Collaborate with scientists, software engineers, and other data creators to evaluate performance of AI models
+About The Team
+
+Amazon strives to be the world’s most customer-centric company, where customers can research and purchase anything they might want online or offline. We set big goals and are looking for people who can help us reach and exceed them. The AGI organization provides AI capabilities for a variety of Amazon products and searches. We provide secure, flexible, cost effective, and high-quality data development services to our customers, that enables them to build advanced ML models.
+
+BASIC QUALIFICATIONS- Advanced degree in computer science, mathematics, statistics, machine learning or equivalent quantitative field
+
+
+ Experience with language annotation and other forms of data markup
+ Knowledge of one or more scripting languages (e.g., Python, Ruby, Perl)
+ 2+ years experience in computational linguistics or language data processing or AI data creation
+ Experience working with speech, text, and multimodal data in multiple languages
+ Excellent communication, strong organizational skills and very detailed oriented
+ Comfortable working in a fast paced, highly collaborative, dynamic work environment
+PREFERRED QUALIFICATIONS- Experience with database queries and data analysis processes (SQL, R, MATLAB, etc.), or Unix
+
+
+ PhD in Computational Linguistics (or equivalent field with computational emphasis)
+ Expertise in bootstrapping AI data collections for quickly evolving requirements
+ Extensive experience working with speech, text, and multimodal data in multiple languages
+ Experience in data creation for complex agentic workflows
+ Practical experience with Machine Learning
+ Familiarity with technical concepts such as APIs
+ Practical knowledge of version control and agile development
+ Willingness to support several projects at one time, and to accept reprioritization as necessary
+ Able to think creatively and possess strong analytical and problem solving skills
+Amazon is an equal opportunities employer. We believe passionately that employing a diverse workforce is central to our success. We make recruiting decisions based on your experience and skills. We value your passion to discover, invent, simplify and build. Protecting your privacy and the security of your data is a longstanding top priority for Amazon. Please consult our Privacy Notice (https://www.amazon.jobs/en/privacy_page) to know more about how we collect, use and transfer the personal data of our candidates.
+
+Our inclusive culture empowers Amazonians to deliver the best results for our customers. If you have a disability and need a workplace accommodation or adjustment during the application and hiring process, including support for the interview or onboarding process, please visit https://amazon.jobs/content/en/how-we-hire/accommodations for more information. If the country/region you’re applying in isn’t listed, please contact your Recruiting Partner.
+
+#Jobster",4377612358.pdf
+Netherlands,AI / Machine Learning Engineer,,,https://www.linkedin.com/jobs/view/4377911044/?eBP=NON_CHARGEABLE_CHANNEL&refId=WDGwp1C9HXHKqEEfz0yfCQ%3D%3D&trackingId=S%2FI%2B9bI1AVMPCBPmtSHW5Q%3D%3D&trk=flagship3_search_srp_jobs,"AI / Machine Learning Engineer
+Randstad / Hybrid | Full-time 
+About the role
+We’re hiring a AI / Machine Learning Engineer to work on large-scale, real-world machine learning problems that directly impact how products and operations perform.
+This is a hands-on engineering role, focused on building, deploying and improving ML models that run in production every day. You will work closely with software engineers, data engineers and product teams to turn complex problems into scalable ML solutions.
+This is not a research-only position. Your models go live, are monitored, and are measured on impact.
+What you’ll work on
+You may work with modern AI approaches including LLM-based systems where relevant, but this role is focused on shipping reliable, scalable models into production environments.
+You will work on applied ML use cases such as:
+Forecasting & optimization problems (e.g. demand, capacity, planning)
+Ranking, recommendation or decision systems that operate at scale
+Translating data into features, models and production pipelines
+Deploying ML models into production environments (batch and/or real-time)
+Monitoring model performance, data quality and drift
+Iterating on models based on real-world feedback and performance metrics
+You’ll own the ML lifecycle end-to-end: problem framing → modeling → deployment → improvement.
+Technical environment
+You’ll work in a modern ML engineering setup, typically including:
+Python as the main language
+ML frameworks such as PyTorch, TensorFlow or scikit-learn
+SQL and large-scale data processing
+Docker, CI/CD and cloud infrastructure
+Production environments where reliability, latency and scalability matter
+Exact tooling may vary, but engineering quality and production-readiness are key.
+Who you are
+You are an engineer who enjoys working at the intersection of data, software and applied machine learning.
+You bring:
+Experience shipping machine learning models to production
+Strong Python skills and solid engineering fundamentals
+Comfort working with data at scale and reasoning about trade-offs
+A pragmatic mindset: you care about impact, not just model accuracy
+Clear communication and a collaborative approach
+Why this role is interesting
+Work on non-trivial ML problems with measurable real-world impact
+Full ownership of models in production — not just experimentation
+Collaboration with strong engineering and data teams
+A culture that values quality, correctness and continuous improvement
+Hybrid working setup with flexibility and autonomy
+Interested?
+Apply directly or reach out for an informal conversation.
+We care about how you think and build, not just what’s on your CV.",4377911044.pdf

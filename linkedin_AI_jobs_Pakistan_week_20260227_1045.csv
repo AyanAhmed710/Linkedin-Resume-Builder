@@ -1,0 +1,213 @@
+country,job_title,company_name,location,job_url,job_description
+Pakistan,Agentic AI Solution Engineer,,,https://www.linkedin.com/jobs/view/4378001447/?eBP=BUDGET_EXHAUSTED_JOB&refId=cDTETqWVnV%2B84nasazYgSw%3D%3D&trackingId=MF4IP1N450uekmzr9eNJfQ%3D%3D&trk=flagship3_search_srp_jobs,"We are looking for a senior, hands-on Agentic AI Solution Architect who can consult, design, and finalize the end-to-end solution architecture and scope of work for an enterprise-grade Agentic AI platform.
+Location: DHA Phase 4 Lahore, Pakistan
+Timings: 5pm-2am PKT (Fulltime, onsite)
+This role is NOT about coding everything.
+It is about:
+Asking the right questions
+Defining what should be built vs what should not
+Designing a secure, scalable, cloud-native agentic architecture
+Producing clear solution artifacts that engineering teams can execute on
+What You Will Own (Scope of Work)
+Business Discovery & Problem Framing
+Work with stakeholders to:
+Understand current processes, pain points, and automation opportunities
+Identify where agentic AI truly adds value vs simple automation
+Convert ambiguous ideas into:
+Clear use cases
+Agent responsibilities
+Success metrics (accuracy, cost, latency, risk)
+Deliverables:
+Problem statements
+Use-case prioritization
+Agent responsibility matrix
+Agentic AI System Design
+Design multi-agent workflows including:
+Task planning agents
+Reasoning agents
+Execution agents
+Validation / guardrail agents
+Decide when to use:
+Deterministic workflows vs agent-driven flows
+Human-in-the-loop vs autonomous execution
+Deliverables:
+Agent interaction diagrams
+Decision trees & control flows
+Cloud & AI Architecture (AWS-Centric)
+You will design (not just recommend) the architecture using:
+Core Stack
+Amazon Bedrock
+Model selection strategy (Claude, Nova, Titan, etc.)
+Prompt orchestration & guardrails
+Amazon Nova
+Agent orchestration & reasoning layers
+AWS Lambda
+Event-driven execution
+Tool calling by agents
+Amazon Textract
+Document ingestion & structured extraction
+Amazon Bedrock Data Automation (BDA)
+Knowledge grounding
+Vectorization & retrieval
+OpenAI models
+Use-case based comparison vs Bedrock models
+Hybrid model strategy (cost, latency, accuracy)
+Deliverables:
+High-level architecture diagram
+Data flow & security model
+Model selection rationale
+Tooling, Integrations & Data Strategy
+Define how agents will:
+Call internal tools
+Invoke APIs
+Query databases
+Handle documents & unstructured data
+Design RAG vs Agentic Retrieval strategy
+Define:
+Prompt versioning
+Memory (short-term vs long-term)
+Context boundaries
+Deliverables:
+Tool invocation strategy
+Data & memory architecture
+Integration map
+Governance, Security & Risk Controls
+Define:
+Role-based access
+Prompt & output guardrails
+Audit logging
+Cost controls
+Address:
+Hallucination risks
+Data leakage
+Model drift
+Deliverables:
+AI governance checklist
+Risk mitigation plan
+Scope Definition & Delivery Blueprint
+This is the most critical output.
+You will:
+Break the solution into phases
+Phase 1: MVP
+Phase 2: Scale
+Phase 3: Autonomy & optimization
+Define:
+In-scope vs out-of-scope
+Team roles required (Dev, MLOps, Cloud, QA)
+Time & effort estimates (high-level)
+Deliverables:
+Final Scope of Work (SoW)
+Phased roadmap
+Delivery-ready architecture pack
+Required Profile (Non-Negotiable)
+Background
+3+ years experience across:
+Solution Architecture
+AI/ML systems
+Automation platforms
+Has designed systems, not just implemented them
+AI & Agentic Expertise
+Proven experience with:
+LLM-based systems
+Multi-agent orchestration
+Prompt engineering at scale
+Strong understanding of:
+When NOT to use agents
+Trade-offs between agents, workflows, and APIs
+Cloud & AWS
+Deep hands-on knowledge of:
+AWS (Lambda, IAM, S3, VPC)
+Amazon Bedrock ecosystem
+Event-driven architectures
+Able to reason about cost, latency, and scalability
+Business & Communication
+Can:
+Translate business problems into technical solutions
+Push back diplomatically on unrealistic expectations
+Communicate clearly with executives and engineers
+Nice to Have (Strong Plus)
+Previous consulting or pre-sales architecture experience
+Experience designing AI CoE or platform teams
+Familiarity with:
+LangGraph / LangChain
+Agent frameworks
+Enterprise RPA + AI convergence
+Experience in regulated or enterprise environments
+Requirements added by the job poster
+• 3+ years of work experience with Amazon Web Services (AWS)
+• 2+ years of work experience with AWS Lambda"
+Pakistan,Artificial Intelligence Engineer,,,https://www.linkedin.com/jobs/view/4378711876/?eBP=CwEAAAGcnZ_IH2xamYkRuzggljA96ihHErG3qzwkvPAzcvsOADxCTjLQ12ME5-rkCq8vpenQboqgt2P1Sf7Qnz-NropqJAHjmPjBPCSW7SDlnugkJwC7lyXTRPIQ7WjMkB3z91vAc4lCEtXbU4MjJ0F3Nn6J0UKyVQ6od7PQrdO2PfEU0qgL_F0X5wot6qhEkWcGFaBEOQwpZwL2BAEowLFjrGiYIa6vxL-AMpiGfKVYVW_Y_Xlq7u1xiu4jDn8HBHaPXA4oELxJRsvxTBPeb7DpaB03CWGTjIDlwU7XSALvdQsqeU71kBOauOrNcsrS24Gu9bBqXVD4I61f1ApHWF6_pUddbBvRFCBC16nbKwKGbjlqYDmobnrA9g1V8EOfC7M_zlVLVYeie25WygOKDfzix3X3WaBSTYNVdYQb8L47EEiqjKSsE-Kf5lvKxDrn-Wu5Fq37rsgIWls0tKaN5QkJwMuBba7vXAjo4VbygqhuAvCfJHjc_YfeB9-MgO78_gpJdP2nYHNVXzf1wc5yjlo&refId=cDTETqWVnV%2B84nasazYgSw%3D%3D&trackingId=qQIiMwaOLoLtF5bTF891qg%3D%3D&trk=flagship3_search_srp_jobs,"Job Summary:
+The AI Engineer is responsible for designing, developing, and implementing AI/ML solutions that support business goals. This includes building machine learning models, integrating them into applications, optimizing existing AI systems, and collaborating with cross-functional teams to deliver scalable, data-driven solutions.
+Job Responsibilities:
+AI & Machine Learning Development
+Design, build, and deploy machine learning models (supervised, unsupervised, NLP, deep learning).
+Develop end-to-end ML pipelines including data ingestion, preprocessing, training, testing, and deployment.
+Evaluate model performance using statistical and ML evaluation techniques.
+Data Engineering & Processing
+Collect, clean, and transform structured and unstructured datasets.
+Work with data engineering teams to ensure high-quality data availability.
+Build scalable data pipelines using tools like Python, SQL, Spark, or cloud-native services.
+AI System Integration
+Integrate AI/ML models into production systems (APIs, microservices, cloud platforms).
+Work with engineering teams to operationalize models using MLOps practices.
+Ensure CI/CD pipelines for model retraining and deployment.
+Research & Optimization
+Experiment with new algorithms, frameworks, and techniques.
+Optimize models for performance, latency, and scalability.
+Stay updated with the latest trends in AI/ML, LLMs, GenAI, and related technologies.
+Collaboration & Documentation
+Partner with business stakeholders to translate problems into AI-driven solutions.
+Work closely with data scientists, data engineers, product teams, and architects.
+Prepare documentation, technical reports, and solution designs
+Job Requirements:
+Strong experience in Python and ML libraries (TensorFlow, PyTorch, Scikit-learn, Hugging Face).
+Hands-on expertise in building and deploying ML/AI models.
+Understanding of LLMs, NLP, and generative AI concepts.
+Solid foundation in algorithms, statistics, and probability.
+Experience with cloud platforms (AWS / Azure / GCP).
+Knowledge of MLOps tools (MLflow, Kubeflow, Docker, Kubernetes).
+Experience with APIs and microservices.
+Bachelor’s or Master’s in Computer Science, Engineering, AI, Data Science, or related field.
+Certifications in AI/ML or cloud technologies. (preferred/good to have)
+Experience with vector databases, embeddings, or RAG pipelines. (preferred/good to have)
+Background in enterprise-scale AI solutions. (preferred/good to have)
+Strong analytical and problem-solving abilities.
+Effective communication and stakeholder management.
+Ability to work in cross-functional, agile teams.
+Curiosity and continuous learning mindset.
+Requirements added by the job poster
+• Bachelor's Degree
+• Working in an onsite setting
+• 4+ years of work experience with AIML"
+Pakistan,Remote LLM Agentic Trainer - Programmer,,,https://www.linkedin.com/jobs/view/4378378739/?eBP=CwEAAAGcnZ_IIHBenl7HCL68GalLFl-WurupPAABvyJk6gBbuTjVyME-eI-RsSWF8AczNpyan6AeMN9X0yqTXpk-RRwgBSWpKcAXT2dgIIswJ-eM_VfkZX1-OAtKLsKoomA_1LGq2VixsmvWODvhrTiGOMYw7VbSxkI-kZLv6TZaamiN-Lu3SgveS-MbN_GFh-h47xETt-LQpIusgACDO3xRN0eiDKHWiXWBBqYEsRcH-X812j7qJ6Jc0s6NzEGE0Myft_NwLIaKdr_31_J4TuJZSFMY6HjRqRkMCi9BZHMjqNSd9_GFniVCHdrXgIqKJD-PqXzVyDd7nV1rttH_Ti7dp7UFUrKoDxdeFOPip6vVQBUg-2eLeJUdxVP-Vm4iLmklMdMkzN4MfZTBrHec6xxtQ5Yi6YsnxUwUwY4SC7vBvTj2yIo70L0z1OGQncPQ7alyXfkVUA56cAaG4MnNWaLIglzF5VkeSWTq8fWUa0HQkc8ate8sKqfLFmaMuiVqB9YAN2l2WORo1ycY1eyVor8&refId=cDTETqWVnV%2B84nasazYgSw%3D%3D&trackingId=DYBi%2ByBCTsvypHqdWD2CQw%3D%3D&trk=flagship3_search_srp_jobs,"About Turing
+Turing is one of the world’s fastest-growing AI companies accelerating the advancement and deployment of powerful AI systems.
+Turing helps customers in two ways: Working with the world’s leading AI labs to advance frontier model capabilities in thinking, reasoning, coding, agentic behavior, multimodality, multilinguality, STEM and frontier knowledge; and leveraging that work to build real-world AI systems that solve mission-critical priorities for companies.
+Role Overview
+We are seeking candidates with experience in any programming language or tech stacks to validate and ensure the quality of training data used in developing agentic AI systems. This role involves working with function-calling methods to create structured tasks, ensuring data workflows remain consistent, accurate, and aligned with cutting-edge AI requirements.
+What does day-to-day look like?
+Validate large-scale training datasets and maintain strict quality standards.
+Create, manipulate, and structure JSON tasks for function-calling workflows.
+Work closely with AI researchers and teams to align datasets with agentic AI use cases.
+Monitor data accuracy, consistency, and integrity across projects.
+Contribute to documentation and best practices for dataset preparation and validation.
+Requirements
+Strong proficiency in Python or JavaScript or Java or any other programming languages for data handling and workflow automation.
+Solid understanding of SQL for querying and managing datasets.
+Expertise or Knowledge in handling JSON.
+Exceptional attention to detail with a focus on data quality and consistency.
+Interest in or exposure to agentic AI, LLMs, or NLP best practices.
+Bonus: Prior experience with data annotation tools or prompt engineering for Agent AI.
+Perks of Freelancing With Turing
+Work in a fully remote environment.
+Opportunity to work on cutting-edge AI projects with leading LLM companies.
+Offer Details
+Commitments Required: At least 4 hours per day and minimum 20 hours per week with overlap of 4 hours with PST. (We have 3 options of time commitment: 20 hrs/week, 30 hrs/week or 40 hrs/week)
+Engagement Type: Contractor assignment (no medical/paid leave)
+Duration of Contract: 1 month (adjustable based on engagement)
+Location: India, Pakistan, Nigeria, Kenya, Egypt, Ghana, Bangladesh, Turkey, Brazil, Mexico
+Evaluation Process (60 mins) :
+Below tests are setup in vetsmith for candidates to take it online at their convinient time
+Automated coding challenge (Choose any programming language) - (30-45) mins
+Function calling MCQ test (30 mins)
+After applying, you will receive an email with a login link. Please use that link to access the portal and complete your profile.
+Know amazing talent? Refer them at turing.com/referrals, and earn money from your network."
