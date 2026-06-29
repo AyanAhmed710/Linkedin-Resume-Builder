@@ -175,7 +175,9 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     else:
         options.add_argument("--start-maximized")
 
-    driver = uc.Chrome(options=options)
+    chrome_version = os.environ.get("CHROME_VERSION")
+    version_main = int(chrome_version) if chrome_version else None
+    driver = uc.Chrome(options=options, version_main=version_main)
     wait = WebDriverWait(driver, 15)
 
     # ── internal helpers ──────────────────────────────────────────────────
