@@ -378,12 +378,53 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
                     loc = ""
 
                 if job_url:
+                    # Click card to load description in right panel (no new page = no memory crash)
+                    desc = ""
+                    try:
+                        driver.execute_script("arguments[0].scrollIntoView(true);", card)
+                        driver.execute_script("arguments[0].click();", card)
+                        time.sleep(3)
+                        # Wait for description panel
+                        try:
+                            WebDriverWait(driver, 10).until(
+                                EC.presence_of_element_located((By.CSS_SELECTOR,
+                                    ".jobs-description, .jobs-description-content__text, "
+                                    ".jobs-search__job-details--wrapper, .job-details-jobs-unified-top-card__job-title"
+                                ))
+                            )
+                        except Exception:
+                            pass
+                        _click_all_expanders(driver)
+                        time.sleep(1)
+                        for sel in [
+                            ".jobs-description-content__text",
+                            ".jobs-description__content",
+                            ".jobs-description",
+                            ".jobs-search__job-details--wrapper",
+                        ]:
+                            try:
+                                el = driver.find_element(By.CSS_SELECTOR, sel)
+                                desc = el.text.strip()
+                                if desc:
+                                    break
+                            except Exception:
+                                pass
+                    except Exception as e:
+                        log(f"       ⚠️ Panel error: {e}")
+
+                    log(f"  🔍 {title} @ {company}")
+                    if desc:
+                        log(f"       ✅ {len(desc)} chars | Preview: {desc[:100]}...")
+                    else:
+                        log(f"       ⚠️ Empty description")
+
                     jobs.append({
-                        "country":      country,
-                        "job_title":    title,
-                        "company_name": company,
-                        "location":     loc,
-                        "job_url":      job_url,
+                        "country":         country,
+                        "job_title":       title,
+                        "company_name":    company,
+                        "location":        loc,
+                        "job_url":         job_url,
+                        "job_description": desc,
                     })
             except Exception as e:
                 log(f"  ⚠️ Card parse error: {e}")
@@ -391,41 +432,6 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         if skipped:
             log(f"  🚫 Filtered {skipped} irrelevant jobs")
         return jobs
-
-    def get_description(job_url):
-        """
-        1. Load job page, wait for render
-        2. Scroll to trigger lazy-loaded content
-        3. Click ALL expand buttons (removes '… more' truncation)
-        4. Read body.text and extract 'About the job' block
-        """
-        driver.get(job_url)
-        time.sleep(6)
-
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight / 3);")
-        time.sleep(2)
-
-        _click_all_expanders(driver)
-        time.sleep(1)
-
-        body_text = driver.find_element(By.TAG_NAME, "body").text
-        desc = _extract_about_the_job(body_text)
-
-        # Retry once if empty
-        if not desc:
-            log("    🔄 Retrying after longer wait...")
-            time.sleep(6)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight / 3);")
-            time.sleep(1)
-            _click_all_expanders(driver)
-            time.sleep(1)
-            body_text = driver.find_element(By.TAG_NAME, "body").text
-            desc = _extract_about_the_job(body_text)
-
-        if not desc:
-            log("    ⚠️ Could not extract description")
-
-        return desc
 
     # ── main flow ─────────────────────────────────────────────────────────
     try:
@@ -441,19 +447,6 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
             if not jobs:
                 log(f"  ⚠️ No jobs found for {country}")
                 continue
-
-            log("  ✅ Metadata collected — fetching descriptions...")
-
-            for idx, job in enumerate(jobs):
-                log(f"\n  🔍 ({idx+1}/{len(jobs)}) {job['job_title']} @ {job['company_name']}")
-                desc = get_description(job["job_url"])
-                job["job_description"] = desc
-                if desc:
-                    log(f"       ✅ {len(desc)} chars")
-                    log(f"       Preview: {desc[:120]}...")
-                else:
-                    log("       ⚠️ Empty description")
-                time.sleep(3)
 
             all_jobs.extend(jobs)
 
