@@ -172,14 +172,7 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-gpu")
-        options.add_argument("--window-size=1280,800")
-        options.add_argument("--blink-settings=imagesEnabled=false")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-plugins")
-        options.add_argument("--no-zygote")
-        options.add_argument("--disk-cache-size=0")
-        options.add_argument("--media-cache-size=0")
-        options.add_argument("--js-flags=--max-old-space-size=256")
+        options.add_argument("--window-size=1920,1080")
     else:
         options.add_argument("--start-maximized")
     options.page_load_strategy = "eager"
@@ -196,8 +189,8 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
             pass
     version_main = int(chrome_version) if chrome_version else None
     driver = uc.Chrome(options=options, version_main=version_main)
-    driver.set_page_load_timeout(90)
-    wait = WebDriverWait(driver, 25)
+    driver.set_page_load_timeout(60)
+    wait = WebDriverWait(driver, 20)
 
     # ── internal helpers ──────────────────────────────────────────────────
     def build_url(keyword, location, dp):
@@ -323,20 +316,8 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         except Exception as e:
             log(f"  ⚠️ Page load timed out, continuing anyway: {e}")
 
-        # Wait for LinkedIn SPA to render — title changes from "LinkedIn" to actual page title
-        time.sleep(4)
-        try:
-            WebDriverWait(driver, 30).until(
-                lambda d: d.title not in ("LinkedIn", "")
-            )
-        except Exception:
-            pass
-        try:
-            driver.execute_script("window.scrollTo(0, 300);")
-        except Exception:
-            pass
-        time.sleep(3)
-
+        # Give LinkedIn SPA time to render
+        time.sleep(6)
         log(f"  📍 Current URL: {driver.current_url}")
         log(f"  📄 Page title: {driver.title}")
 
@@ -412,32 +393,37 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         return jobs
 
     def get_description(job_url):
-        try:
-            driver.get(job_url)
-        except Exception as e:
-            log(f"    ⚠️ Navigation error (skipping): {e}")
-            return ""
-        time.sleep(4)
+        """
+        1. Load job page, wait for render
+        2. Scroll to trigger lazy-loaded content
+        3. Click ALL expand buttons (removes '… more' truncation)
+        4. Read body.text and extract 'About the job' block
+        """
+        driver.get(job_url)
+        time.sleep(6)
 
-        try:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight / 3);")
+        time.sleep(2)
+
+        _click_all_expanders(driver)
+        time.sleep(1)
+
+        body_text = driver.find_element(By.TAG_NAME, "body").text
+        desc = _extract_about_the_job(body_text)
+
+        # Retry once if empty
+        if not desc:
+            log("    🔄 Retrying after longer wait...")
+            time.sleep(6)
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight / 3);")
             time.sleep(1)
             _click_all_expanders(driver)
             time.sleep(1)
             body_text = driver.find_element(By.TAG_NAME, "body").text
             desc = _extract_about_the_job(body_text)
-        except Exception as e:
-            log(f"    ⚠️ Page read error (skipping): {e}")
-            return ""
 
         if not desc:
             log("    ⚠️ Could not extract description")
-
-        # Clear memory between pages
-        try:
-            driver.execute_cdp_cmd("Network.clearBrowserCache", {})
-        except Exception:
-            pass
 
         return desc
 
