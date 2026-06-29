@@ -36,6 +36,7 @@ class TaskState:
         self.logs: list[str] = []
         self.status: str = "running"           # running | completed | failed
         self.result = None
+        self.verification_code: Optional[str] = None
 
 tasks: dict[str, TaskState] = {}
 
@@ -71,14 +72,15 @@ async def start_scrape(req: ScrapeRequest):
         try:
             from scraper_service import run_scraper
             result = run_scraper(
-                search_keyword   = req.search_keyword,
-                countries        = req.countries,
-                jobs_per_country = req.jobs_per_country,
-                date_posted      = req.date_posted,
-                log_callback     = log_cb,
-                output_dir       = BASE_DIR,
-                email            = req.email,
-                password         = req.password,
+                search_keyword        = req.search_keyword,
+                countries             = req.countries,
+                jobs_per_country      = req.jobs_per_country,
+                date_posted           = req.date_posted,
+                log_callback          = log_cb,
+                output_dir            = BASE_DIR,
+                email                 = req.email,
+                password              = req.password,
+                get_verification_code = lambda: state.verification_code,
             )
             state.result = result
             state.status = "completed"
@@ -88,6 +90,14 @@ async def start_scrape(req: ScrapeRequest):
 
     threading.Thread(target=_run, daemon=True).start()
     return {"task_id": task_id}
+
+
+@app.post("/api/task/{task_id}/verification")
+async def submit_verification(task_id: str, body: dict):
+    if task_id not in tasks:
+        raise HTTPException(404, "Task not found")
+    tasks[task_id].verification_code = body.get("code", "").strip()
+    return {"ok": True}
 
 
 # ═════════════════════════════════════════════════════════════════════════

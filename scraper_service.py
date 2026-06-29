@@ -129,7 +129,8 @@ def _extract_about_the_job(body_text: str) -> str:
 # --- MAIN SERVICE FUNCTION ---
 # =============================================================================
 def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
-                log_callback=None, output_dir=None, email=None, password=None):
+                log_callback=None, output_dir=None, email=None, password=None,
+                get_verification_code=None):
     """
     Run the LinkedIn job scraper.
 
@@ -239,17 +240,49 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         # Handle LinkedIn email verification / security challenge
         verification_keywords = ["checkpoint", "challenge", "verification", "verify", "pin"]
         if any(kw in driver.current_url for kw in verification_keywords):
+            log("🔐 VERIFICATION_REQUIRED")
             log("⚠️  LinkedIn sent a verification code to your email.")
-            log("👉 Enter the code in the browser window, then click 'Submit'.")
-            log("⏳ Waiting up to 3 minutes for you to complete verification...")
+            log("👉 Enter the code in the box that appeared in the UI.")
+            log("⏳ Waiting up to 3 minutes for the code…")
+
+            # Poll for code submitted via UI
+            code = None
+            deadline = time.time() + 180
+            while time.time() < deadline:
+                if get_verification_code:
+                    code = get_verification_code()
+                if code:
+                    break
+                time.sleep(3)
+
+            if not code:
+                raise RuntimeError("Verification timed out — code was not entered within 3 minutes")
+
+            log(f"🔑 Code received — entering into browser…")
             try:
-                # Wait until URL leaves the verification page (user submitted code)
-                WebDriverWait(driver, 180).until(
+                pin_input = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR,
+                        "input[name='pin'], input[id*='pin'], input[autocomplete='one-time-code'], input[type='number']"
+                    ))
+                )
+                pin_input.clear()
+                pin_input.send_keys(code)
+                time.sleep(0.5)
+                submit_btn = WebDriverWait(driver, 5).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))
+                )
+                submit_btn.click()
+                time.sleep(3)
+            except Exception as e:
+                raise RuntimeError(f"Could not enter verification code: {e}")
+
+            try:
+                WebDriverWait(driver, 30).until(
                     lambda d: not any(kw in d.current_url for kw in verification_keywords)
                 )
                 log("✅ Verification complete!")
             except:
-                raise RuntimeError("Verification timed out — code was not entered within 3 minutes")
+                raise RuntimeError("Verification failed — code may be incorrect")
 
         log(f"✅ Logged in → {driver.current_url}")
 

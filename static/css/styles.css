@@ -782,3 +782,20 @@ main{
   .tab-btn span{display:none}
   .field-row{flex-direction:column;gap:0}
 }
+
+/* ── Verification modal ──────────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.modal-overlay.hidden { display: none; }
+.modal-card {
+    width: min(480px, 92vw);
+    animation: slideUp .25s ease;
+}

@@ -396,6 +396,37 @@
     <!-- ═══ Toast container ═══ -->
     <div class="toast-container" id="toast-container"></div>
 
+    <!-- ═══ Verification modal ═══ -->
+    <div class="modal-overlay hidden" id="verification-modal">
+        <div class="modal-card glass-card">
+            <div class="card-head">
+                <div class="card-title-row">
+                    <div class="card-icon-wrap accent-cyan">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h2>LinkedIn Verification</h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <p style="color:var(--t2);margin-bottom:16px;line-height:1.6">
+                    LinkedIn sent a verification code to your email.<br>
+                    Enter it below and the scraper will continue automatically.
+                </p>
+                <div class="field">
+                    <label for="verification-code-input">Verification Code</label>
+                    <div class="input-wrap">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <input type="text" id="verification-code-input" placeholder="e.g. 123456" maxlength="8" autocomplete="one-time-code">
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="btn-submit-verification" style="margin-top:12px;width:100%">
+                    <span class="btn-content">Submit Code</span>
+                    <span class="btn-loader hidden"><span class="spinner"></span> Submitting…</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="/js/app.js"></script>
 </body>

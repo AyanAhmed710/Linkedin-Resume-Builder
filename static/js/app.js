@@ -115,20 +115,60 @@
         return d.innerHTML;
     }
 
+    // ── Verification modal ──────────────────────────────────────────────
+    const verificationModal = $("#verification-modal");
+    const verificationInput = $("#verification-code-input");
+    const btnSubmitVerification = $("#btn-submit-verification");
+    let _verificationTaskId = null;
+
+    function showVerificationModal(taskId) {
+        _verificationTaskId = taskId;
+        verificationInput.value = "";
+        verificationModal.classList.remove("hidden");
+        verificationInput.focus();
+    }
+
+    btnSubmitVerification.addEventListener("click", async () => {
+        const code = verificationInput.value.trim();
+        if (!code) { toast("Please enter the verification code.", "error"); return; }
+        btnLoading(btnSubmitVerification, true);
+        try {
+            await fetch(`/api/task/${_verificationTaskId}/verification`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code }),
+            });
+            verificationModal.classList.add("hidden");
+            toast("Code submitted — scraper is continuing…", "success");
+        } catch (err) {
+            toast("Failed to submit code: " + err.message, "error");
+        }
+        btnLoading(btnSubmitVerification, false);
+    });
+
+    verificationInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") btnSubmitVerification.click();
+    });
+
     // ── SSE log streamer ────────────────────────────────────────────────
     function streamLogs(taskId, term, onDone) {
         const es = new EventSource(`/api/logs/${taskId}`);
         es.onmessage = (ev) => {
             const data = JSON.parse(ev.data);
             if (data.type === "log") {
+                if (data.message.includes("VERIFICATION_REQUIRED")) {
+                    showVerificationModal(taskId);
+                }
                 termAppend(term, data.message);
             } else if (data.type === "status") {
                 es.close();
+                verificationModal.classList.add("hidden");
                 if (onDone) onDone(data.status, data.result);
             }
         };
         es.onerror = () => {
             es.close();
+            verificationModal.classList.add("hidden");
             termAppend(term, "⚠️ Connection to server lost.");
             if (onDone) onDone("failed", null);
         };
