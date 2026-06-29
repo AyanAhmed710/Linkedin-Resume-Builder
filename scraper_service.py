@@ -176,10 +176,10 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         options.add_argument("--blink-settings=imagesEnabled=false")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-plugins")
-        options.add_argument("--no-zygote")
         options.add_argument("--disk-cache-size=0")
         options.add_argument("--media-cache-size=0")
-        options.add_argument("--js-flags=--max-old-space-size=256")
+        options.add_argument("--disable-background-networking")
+        options.add_argument("--disable-sync")
     else:
         options.add_argument("--start-maximized")
     options.page_load_strategy = "eager"
@@ -196,8 +196,9 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
             pass
     version_main = int(chrome_version) if chrome_version else None
     driver = uc.Chrome(options=options, version_main=version_main)
-    driver.set_page_load_timeout(60)
-    wait = WebDriverWait(driver, 20)
+    driver.set_page_load_timeout(90)
+    driver.command_executor._timeout = 120
+    wait = WebDriverWait(driver, 25)
 
     # ── internal helpers ──────────────────────────────────────────────────
     def build_url(keyword, location, dp):
