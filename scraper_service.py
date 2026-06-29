@@ -163,9 +163,19 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     # ── Chrome setup ──────────────────────────────────────────────────────
     log("🌐 Launching Chrome...")
     options = uc.ChromeOptions()
-    options.add_argument("--start-maximized")
 
-    driver = uc.Chrome(options=options, version_main=149)
+    chrome_bin = os.environ.get("CHROME_BIN", "")
+    if chrome_bin:
+        options.binary_location = chrome_bin
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--window-size=1920,1080")
+    else:
+        options.add_argument("--start-maximized")
+
+    driver = uc.Chrome(options=options)
     wait = WebDriverWait(driver, 15)
 
     # ── internal helpers ──────────────────────────────────────────────────
