@@ -173,8 +173,10 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-gpu")
         options.add_argument("--window-size=1920,1080")
+        options.add_argument("--blink-settings=imagesEnabled=false")
     else:
         options.add_argument("--start-maximized")
+    options.page_load_strategy = "eager"
 
     chrome_version = os.environ.get("CHROME_VERSION")
     if not chrome_version:
@@ -188,7 +190,8 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
             pass
     version_main = int(chrome_version) if chrome_version else None
     driver = uc.Chrome(options=options, version_main=version_main)
-    wait = WebDriverWait(driver, 15)
+    driver.set_page_load_timeout(60)
+    wait = WebDriverWait(driver, 20)
 
     # ── internal helpers ──────────────────────────────────────────────────
     def build_url(keyword, location, dp):
@@ -309,12 +312,15 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     def collect_job_data(country):
         url = build_url(search_keyword, country, date_posted)
         log(f"  🔗 {url}")
-        driver.get(url)
+        try:
+            driver.get(url)
+        except Exception as e:
+            log(f"  ⚠️ Page load timed out, trying to continue: {e}")
         try:
             wait.until(EC.presence_of_element_located(
                 (By.CSS_SELECTOR, "li[data-occludable-job-id]")
             ))
-            time.sleep(3)
+            time.sleep(2)
         except:
             log("  ⚠️ Timed out waiting for cards.")
             return []
