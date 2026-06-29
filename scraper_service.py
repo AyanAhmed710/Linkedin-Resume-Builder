@@ -197,7 +197,6 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     version_main = int(chrome_version) if chrome_version else None
     driver = uc.Chrome(options=options, version_main=version_main)
     driver.set_page_load_timeout(90)
-    driver.command_executor._timeout = 120
     wait = WebDriverWait(driver, 25)
 
     # ── internal helpers ──────────────────────────────────────────────────
@@ -324,28 +323,19 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         except Exception as e:
             log(f"  ⚠️ Page load timed out, continuing anyway: {e}")
 
-        # Wait for LinkedIn SPA to render job cards
+        # Wait for LinkedIn SPA to render — title changes from "LinkedIn" to actual page title
         time.sleep(4)
+        try:
+            WebDriverWait(driver, 30).until(
+                lambda d: d.title not in ("LinkedIn", "")
+            )
+        except Exception:
+            pass
         try:
             driver.execute_script("window.scrollTo(0, 300);")
         except Exception:
             pass
-
-        # Actively wait up to 25s for any card selector to appear
-        selectors = [
-            "li[data-occludable-job-id]",
-            "li[data-job-id]",
-            ".job-card-container",
-            ".jobs-search__results-list li",
-            ".scaffold-layout__list-container li",
-        ]
-        try:
-            wait.until(EC.presence_of_element_located(
-                (By.CSS_SELECTOR, ", ".join(selectors))
-            ))
-        except Exception:
-            pass
-        time.sleep(2)
+        time.sleep(3)
 
         log(f"  📍 Current URL: {driver.current_url}")
         log(f"  📄 Page title: {driver.title}")
