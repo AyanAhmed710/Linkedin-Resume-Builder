@@ -176,6 +176,14 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         options.add_argument("--start-maximized")
 
     chrome_version = os.environ.get("CHROME_VERSION")
+    if not chrome_version:
+        try:
+            import subprocess
+            bin_path = os.environ.get("CHROME_BIN", "google-chrome")
+            result = subprocess.run([bin_path, "--version"], capture_output=True, text=True)
+            chrome_version = result.stdout.strip().split()[-1].split(".")[0]
+        except Exception:
+            pass
     version_main = int(chrome_version) if chrome_version else None
     driver = uc.Chrome(options=options, version_main=version_main)
     wait = WebDriverWait(driver, 15)
