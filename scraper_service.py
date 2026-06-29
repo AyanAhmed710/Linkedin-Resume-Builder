@@ -10,18 +10,13 @@ import csv
 import os
 from datetime import datetime
 from urllib.parse import quote_plus
-from selenium import webdriver
+import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 
-load_dotenv()
-
-LINKEDIN_EMAIL    = os.getenv("LINKEDIN_EMAIL")
-LINKEDIN_PASSWORD = os.getenv("LINKEDIN_PASSWORD")
-BASE_DIR          = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # =============================================================================
 # --- RELEVANCE FILTER ---
@@ -134,7 +129,7 @@ def _extract_about_the_job(body_text: str) -> str:
 # --- MAIN SERVICE FUNCTION ---
 # =============================================================================
 def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
-                log_callback=None, output_dir=None):
+                log_callback=None, output_dir=None, email=None, password=None):
     """
     Run the LinkedIn job scraper.
 
@@ -146,6 +141,8 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     date_posted      : str   ("24h" | "week" | "month" | "any")
     log_callback     : callable(str) — receives log messages
     output_dir       : str — directory for the CSV; defaults to BASE_DIR
+    email            : str — LinkedIn email (overrides .env)
+    password         : str — LinkedIn password (overrides .env)
 
     Returns
     -------
@@ -154,22 +151,21 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     if output_dir is None:
         output_dir = BASE_DIR
 
+    # Use passed credentials; fall back to .env if not provided
+    load_dotenv(override=True)
+    LINKEDIN_EMAIL    = email    or os.getenv("LINKEDIN_EMAIL")
+    LINKEDIN_PASSWORD = password or os.getenv("LINKEDIN_PASSWORD")
+
     def log(msg):
         if log_callback:
             log_callback(str(msg))
 
     # ── Chrome setup ──────────────────────────────────────────────────────
     log("🌐 Launching Chrome...")
-    options = Options()
+    options = uc.ChromeOptions()
     options.add_argument("--start-maximized")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option("useAutomationExtension", False)
 
-    driver = webdriver.Chrome(options=options)
-    driver.execute_script(
-        "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-    )
+    driver = uc.Chrome(options=options, version_main=149)
     wait = WebDriverWait(driver, 15)
 
     # ── internal helpers ──────────────────────────────────────────────────
@@ -184,11 +180,56 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     def login():
         log("🔐 Logging in to LinkedIn...")
         driver.get("https://www.linkedin.com/login")
-        time.sleep(3)
-        driver.find_element(By.ID, "username").send_keys(LINKEDIN_EMAIL)
-        driver.find_element(By.ID, "password").send_keys(LINKEDIN_PASSWORD)
-        driver.find_element(By.XPATH, "//button[@type='submit']").click()
-        time.sleep(5)
+
+        # Wait for the login form to render
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[autocomplete='username webauthn']"))
+        )
+        log("  ✔ Login form rendered")
+
+        # Use JS to fill fields — avoids interactability issues with React's dual mobile/desktop DOM
+        def js_fill(css_selector, value):
+            # Find the LAST matching element (desktop version is last in DOM)
+            script = """
+                var inputs = document.querySelectorAll(arguments[0]);
+                var el = inputs[inputs.length - 1];
+                var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                setter.call(el, arguments[1]);
+                el.dispatchEvent(new Event('input', { bubbles: true }));
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+                return el;
+            """
+            return driver.execute_script(script, css_selector, value)
+
+        js_fill("input[autocomplete='username webauthn']", LINKEDIN_EMAIL)
+        log("  ✔ Email filled")
+        time.sleep(0.3)
+        js_fill("input[autocomplete='current-password']", LINKEDIN_PASSWORD)
+        log("  ✔ Password filled")
+        time.sleep(0.3)
+
+        # Click Sign in — LinkedIn uses type="button" not type="submit"
+        sign_in_btn = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "(//button[@type='button'][.//span[text()='Sign in']])[last()]"))
+        )
+        sign_in_btn.click()
+        time.sleep(4)
+
+        # Handle LinkedIn email verification / security challenge
+        verification_keywords = ["checkpoint", "challenge", "verification", "verify", "pin"]
+        if any(kw in driver.current_url for kw in verification_keywords):
+            log("⚠️  LinkedIn sent a verification code to your email.")
+            log("👉 Enter the code in the browser window, then click 'Submit'.")
+            log("⏳ Waiting up to 3 minutes for you to complete verification...")
+            try:
+                # Wait until URL leaves the verification page (user submitted code)
+                WebDriverWait(driver, 180).until(
+                    lambda d: not any(kw in d.current_url for kw in verification_keywords)
+                )
+                log("✅ Verification complete!")
+            except:
+                raise RuntimeError("Verification timed out — code was not entered within 3 minutes")
+
         log(f"✅ Logged in → {driver.current_url}")
 
     log(f"🔎 Domain filter active: {len(AI_ML_DOMAIN_TERMS)} terms")

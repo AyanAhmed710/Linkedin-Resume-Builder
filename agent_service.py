@@ -31,13 +31,15 @@ PROJECTS_PROMPT = PromptTemplate(
 Job Description:
 {job_description}
 
-Relevant Projects:
+Candidate Projects:
 {retrieved_projects}
 
-Rewrite the projects to align strongly with the job description.
-Use keywords from job description naturally.
+Select the 4 MOST RELEVANT projects from the candidate projects above that best match the job description.
+Rewrite only those 4 projects to align strongly with the job description.
+Use keywords from the job description naturally.
+Do NOT include more than 4 projects. Do NOT invent projects that are not listed above.
 
-IMPORTANT: Respond ONLY with a valid JSON array, no extra text, no markdown.
+IMPORTANT: Respond ONLY with a valid JSON array of exactly 4 items, no extra text, no markdown.
 Each item must have exactly these keys:
 [
   {{
@@ -80,7 +82,46 @@ def _parse_json(llm_output: str):
     return json.loads(cleaned)
 
 
-def run_agent(csv_path, log_callback=None, output_dir=None):
+def _chroma_from_txt(txt_path: str, embedding):
+    """Parse a user profile TXT and return (vs_projects, vs_about) in-memory Chroma stores."""
+    with open(txt_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    about_text    = ""
+    projects_text = ""
+
+    if re.search(r"\[ABOUT\]", content, re.IGNORECASE):
+        m = re.search(r"\[ABOUT\](.*?)(?:\[PROJECTS\]|$)", content, re.IGNORECASE | re.DOTALL)
+        if m:
+            about_text = m.group(1).strip()
+    if re.search(r"\[PROJECTS\]", content, re.IGNORECASE):
+        m = re.search(r"\[PROJECTS\](.*?)(?:\[ABOUT\]|$)", content, re.IGNORECASE | re.DOTALL)
+        if m:
+            projects_text = m.group(1).strip()
+
+    # Fall back: no headers — treat whole file as projects, copy to about too
+    if not about_text and not projects_text:
+        projects_text = content.strip()
+        about_text    = content.strip()
+    elif not about_text:
+        about_text = projects_text
+    elif not projects_text:
+        projects_text = about_text
+
+    # Split projects by blank lines so each chunk becomes a retrievable document
+    project_docs = [
+        Document(page_content=chunk.strip())
+        for chunk in re.split(r"\n{2,}", projects_text)
+        if chunk.strip()
+    ]
+    about_docs = [Document(page_content=about_text)]
+
+    vs_projects = Chroma.from_documents(project_docs, embedding)
+    vs_about    = Chroma.from_documents(about_docs,   embedding)
+    return vs_projects, vs_about
+
+
+def run_agent(csv_path, log_callback=None, output_dir=None, profile_txt_path=None, resume_pdf_path=None):
     """
     Generate tailored resumes for every job in *csv_path*.
 
@@ -110,16 +151,21 @@ def run_agent(csv_path, log_callback=None, output_dir=None):
     parser = StrOutputParser()
 
     # ── Vector stores ─────────────────────────────────────────────────────
-    vs_projects = Chroma(
-        embedding_function=embedding,
-        persist_directory=os.path.join(BASE_DIR, "my_chroma_db"),
-        collection_name="projects",
-    )
-    vs_about = Chroma(
-        embedding_function=embedding,
-        persist_directory=os.path.join(BASE_DIR, "my_chroma_db"),
-        collection_name="About",
-    )
+    if profile_txt_path and os.path.exists(profile_txt_path):
+        log("📄 Loading profile from uploaded TXT file...")
+        vs_projects, vs_about = _chroma_from_txt(profile_txt_path, embedding)
+        log("✅ Profile indexed into vector store")
+    else:
+        vs_projects = Chroma(
+            embedding_function=embedding,
+            persist_directory=os.path.join(BASE_DIR, "my_chroma_db"),
+            collection_name="projects",
+        )
+        vs_about = Chroma(
+            embedding_function=embedding,
+            persist_directory=os.path.join(BASE_DIR, "my_chroma_db"),
+            collection_name="About",
+        )
 
     # ── Retrievers ────────────────────────────────────────────────────────
     retriever_projects = vs_projects.as_retriever(
@@ -158,10 +204,14 @@ def run_agent(csv_path, log_callback=None, output_dir=None):
     df = pd.read_csv(csv_path)
     log(f"📊 Found {len(df)} jobs to process")
 
-    input_pdf = os.path.join(BASE_DIR, "resume(3.0).pdf")
-    if not os.path.exists(input_pdf):
-        log("⚠️ Base resume PDF not found – trying resume(2.0).pdf")
-        input_pdf = os.path.join(BASE_DIR, "resume(2.0).pdf")
+    if resume_pdf_path and os.path.exists(resume_pdf_path):
+        input_pdf = resume_pdf_path
+        log(f"📄 Using uploaded resume: {os.path.basename(resume_pdf_path)}")
+    else:
+        input_pdf = os.path.join(BASE_DIR, "resume(3.0).pdf")
+        if not os.path.exists(input_pdf):
+            log("⚠️ Base resume PDF not found – trying resume(2.0).pdf")
+            input_pdf = os.path.join(BASE_DIR, "resume(2.0).pdf")
 
     generated_pdfs = []
 
@@ -202,7 +252,7 @@ def run_agent(csv_path, log_callback=None, output_dir=None):
                 "retrieved_About": text_about,
             })
 
-            projects = _parse_json(output["project_output"])
+            projects = _parse_json(output["project_output"])[:4]
             about = _parse_json(output["About_output"])[0]["About"]
 
             pdf_name = f"{job_id}.pdf"
