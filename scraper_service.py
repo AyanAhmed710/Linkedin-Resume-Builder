@@ -176,6 +176,7 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         options.add_argument("--blink-settings=imagesEnabled=false")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-plugins")
+        options.add_argument("--no-zygote")
         options.add_argument("--disk-cache-size=0")
         options.add_argument("--media-cache-size=0")
     else:
@@ -322,13 +323,29 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         except Exception as e:
             log(f"  ⚠️ Page load timed out, continuing anyway: {e}")
 
-        # Give LinkedIn SPA time to render + trigger lazy loading
-        time.sleep(5)
+        # Wait for LinkedIn SPA to render job cards
+        time.sleep(4)
         try:
             driver.execute_script("window.scrollTo(0, 300);")
         except Exception:
             pass
-        time.sleep(5)
+
+        # Actively wait up to 25s for any card selector to appear
+        selectors = [
+            "li[data-occludable-job-id]",
+            "li[data-job-id]",
+            ".job-card-container",
+            ".jobs-search__results-list li",
+            ".scaffold-layout__list-container li",
+        ]
+        try:
+            wait.until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, ", ".join(selectors))
+            ))
+        except Exception:
+            pass
+        time.sleep(2)
+
         log(f"  📍 Current URL: {driver.current_url}")
         log(f"  📄 Page title: {driver.title}")
 
