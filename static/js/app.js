@@ -116,10 +116,12 @@
     }
 
     // ── Verification modal ──────────────────────────────────────────────
-    const verificationModal = $("#verification-modal");
-    const verificationInput = $("#verification-code-input");
-    const btnSubmitVerification = $("#btn-submit-verification");
-    let _verificationTaskId = null;
+    const verificationModal    = $("#verification-modal");
+    const verificationInput    = $("#verification-code-input");
+    const btnSubmitVerification= $("#btn-submit-verification");
+    const verificationBar      = $("#verification-bar");
+    const btnOpenVerification  = $("#btn-open-verification");
+    let _verificationTaskId    = null;
 
     function showVerificationModal(taskId) {
         _verificationTaskId = taskId;
@@ -127,6 +129,10 @@
         verificationModal.classList.remove("hidden");
         verificationInput.focus();
     }
+
+    btnOpenVerification.addEventListener("click", () => {
+        if (_verificationTaskId) showVerificationModal(_verificationTaskId);
+    });
 
     btnSubmitVerification.addEventListener("click", async () => {
         const code = verificationInput.value.trim();
@@ -231,9 +237,12 @@
                 body: JSON.stringify({ search_keyword: keyword, countries, jobs_per_country: count, date_posted: datep, email, password }),
             });
             const { task_id } = await res.json();
+            _verificationTaskId = task_id;
+            verificationBar.classList.remove("hidden");
 
             streamLogs(task_id, scraperTerm, (status, result) => {
                 btnLoading(btnScrape, false);
+                verificationBar.classList.add("hidden");
                 if (status === "completed" && result) {
                     toast("Scraping completed! File ready.", "success");
                     scraperResult.classList.remove("hidden");
