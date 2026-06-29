@@ -178,8 +178,6 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         options.add_argument("--disable-plugins")
         options.add_argument("--disk-cache-size=0")
         options.add_argument("--media-cache-size=0")
-        options.add_argument("--disable-background-networking")
-        options.add_argument("--disable-sync")
     else:
         options.add_argument("--start-maximized")
     options.page_load_strategy = "eager"
@@ -324,8 +322,13 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
         except Exception as e:
             log(f"  ⚠️ Page load timed out, continuing anyway: {e}")
 
-        # Give LinkedIn SPA time to render
-        time.sleep(6)
+        # Give LinkedIn SPA time to render + trigger lazy loading
+        time.sleep(5)
+        try:
+            driver.execute_script("window.scrollTo(0, 300);")
+        except Exception:
+            pass
+        time.sleep(5)
         log(f"  📍 Current URL: {driver.current_url}")
         log(f"  📄 Page title: {driver.title}")
 
