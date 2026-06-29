@@ -239,6 +239,8 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
 
         # Handle LinkedIn email verification / security challenge
         verification_keywords = ["checkpoint", "challenge", "verification", "verify", "pin"]
+        log(f"🔍 Post-login URL: {driver.current_url}")
+        log(f"🔍 Page title: {driver.title}")
         if any(kw in driver.current_url for kw in verification_keywords):
             log("🔐 VERIFICATION_REQUIRED")
             log("⚠️  LinkedIn sent a verification code to your email.")
