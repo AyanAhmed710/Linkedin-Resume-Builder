@@ -178,10 +178,11 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
     chrome_version = os.environ.get("CHROME_VERSION")
     if not chrome_version:
         try:
-            import subprocess
+            import subprocess, re
             bin_path = os.environ.get("CHROME_BIN", "google-chrome")
             result = subprocess.run([bin_path, "--version"], capture_output=True, text=True)
-            chrome_version = result.stdout.strip().split()[-1].split(".")[0]
+            m = re.search(r'(\d+)\.\d+', result.stdout)
+            chrome_version = m.group(1) if m else None
         except Exception:
             pass
     version_main = int(chrome_version) if chrome_version else None
