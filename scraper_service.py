@@ -260,18 +260,34 @@ def run_scraper(search_keyword, countries, jobs_per_country, date_posted,
 
             log(f"🔑 Code received — entering into browser…")
             try:
-                pin_input = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR,
-                        "input[name='pin'], input[id*='pin'], input[autocomplete='one-time-code'], input[type='number']"
-                    ))
-                )
-                pin_input.clear()
-                pin_input.send_keys(code)
+                # Use JS injection (same as login) to handle React-controlled inputs
+                driver.execute_script("""
+                    var selectors = [
+                        "input[name='pin']",
+                        "input[id*='pin']",
+                        "input[id*='verification']",
+                        "input[autocomplete='one-time-code']",
+                        "input[type='number']",
+                        "input[type='text']"
+                    ];
+                    var el = null;
+                    for (var s of selectors) {
+                        var found = document.querySelectorAll(s);
+                        if (found.length) { el = found[found.length - 1]; break; }
+                    }
+                    if (!el) throw new Error('Pin input not found');
+                    el.focus();
+                    var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                    setter.call(el, arguments[0]);
+                    el.dispatchEvent(new Event('input',  { bubbles: true }));
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                """, code)
                 time.sleep(0.5)
+                # Click submit button
                 submit_btn = WebDriverWait(driver, 5).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))
                 )
-                submit_btn.click()
+                driver.execute_script("arguments[0].click();", submit_btn)
                 time.sleep(3)
             except Exception as e:
                 raise RuntimeError(f"Could not enter verification code: {e}")
